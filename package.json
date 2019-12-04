@@ -1,0 +1,26 @@
+{
+  "devDependencies": {
+    "@babel/core": "^7.7.2",
+    "@babel/plugin-proposal-class-properties": "^7.7.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.6.2",
+    "@babel/preset-env": "^7.7.1",
+    "babel-loader": "^8.0.6",
+    "eslint": "^6.6.0",
+    "metamask-inpage-provider": "^3.0.1",
+    "obj-multiplex": "^1.0.0",
+    "post-message-stream": "^3.0.0",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
+  },
+  "name": "metamask-mobile-provider",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "bundle": "webpack --config webpack.config.js",
+    "lint": "eslint"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
