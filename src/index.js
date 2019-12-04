@@ -1,14 +1,14 @@
-const LocalMessageDuplexStream = require('post-message-stream')
+
 const MetamaskInpageProvider = require('metamask-inpage-provider')
 const createStandardProvider = require('./createStandardProvider').default;
 const ObjectMultiplex = require('obj-multiplex');
 const pump = require('pump');
 const MobilePortStream = require('./MobilePortStream');
-
+const ReactNativePostMessageStream = require('./ReactNativePostMessageStream')
 
 let warned = false;
 
-const metamaskStream = new LocalMessageDuplexStream({
+const metamaskStream = new ReactNativePostMessageStream({
 	name: 'inpage',
 	target: 'contentscript',
 });
@@ -54,7 +54,6 @@ const getPublicConfigWhenReady = async () => {
 	// if state is missing, wait for first update
 	if (!state.networkVersion) {
 		state = await new Promise(resolve => store.once('update', resolve))
-		console.log('new state', state)
 	}
 	return state
 }
@@ -112,7 +111,7 @@ window.ethereum = createStandardProvider(window.proxiedInpageProvider);
 
 window.setupStreams = function () {
 	// the transport-specific streams for communication between inpage and background
-	const pageStream = new LocalMessageDuplexStream({
+	const pageStream = new ReactNativePostMessageStream({
 		name: 'contentscript',
 		target: 'inpage',
 	})
@@ -170,6 +169,7 @@ function logStreamDisconnectWarning (remoteLabel, err) {
 		warningMsg += '\n' + err.stack
 	}
 	console.warn(warningMsg)
+	console.error(err)
 }
 
   

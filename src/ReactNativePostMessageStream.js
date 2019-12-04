@@ -1,11 +1,11 @@
 const DuplexStream = require('readable-stream').Duplex
 const inherits = require('util').inherits
 
-module.exports = ReactNativePostMessageStream
+module.exports = PostMessageStream
 
-inherits(ReactNativePostMessageStream, DuplexStream)
+inherits(PostMessageStream, DuplexStream)
 
-function ReactNativePostMessageStream (opts) {
+function PostMessageStream (opts) {
   DuplexStream.call(this, {
     objectMode: true,
   })
@@ -14,39 +14,63 @@ function ReactNativePostMessageStream (opts) {
   this._target = opts.target
   this._targetWindow = opts.targetWindow || window
   this._origin = (opts.targetWindow ? '*' : location.origin)
-  
+
+  // initialization flags
+  this._init = false
+  this._haveSyn = false
+
   window.addEventListener('message', this._onMessage.bind(this), false)
- 
+  // send syncorization message
+  this._write('SYN', null, noop)
+  this.cork()
 }
 
 // private
-ReactNativePostMessageStream.prototype._onMessage = function (event) {
+PostMessageStream.prototype._onMessage = function (event) {
+  var msg = event.data
+  
+  // validate message
+  if (this._origin !== '*' && event.origin !== this._origin){
+    return
+  }
+  if (event.source !== this._targetWindow && window === top){ 
+    return
+  }
+  if (typeof msg !== 'object'){
+    return
+  }
+  if (msg.target !== this._name){
+    return
+  }
+  if (!msg.data){
+    return
+  }
 
-    console.log('ReactNativePostMessageStream onMessage', event);
-
-    var msg = event.data
-
-    // validate message
-    if (this._origin !== '*' && event.origin !== this._origin) return
-    if (event.source !== this._targetWindow) return
-    if (typeof msg !== 'object') return
-    if (msg.target !== this._name) return
-    if (!msg.data) return
-
- 
+  if (!this._init) {
+    if (msg.data === 'SYN') {
+      this._haveSyn = true
+      this._write('ACK', null, noop)
+    } else if (msg.data === 'ACK') {
+      this._init = true
+      if (!this._haveSyn) {
+        this._write('ACK', null, noop)
+      }
+      this.uncork()
+    }
+  } else {
     // forward message
     try {
-        this.push(msg.data)
+      this.push(msg.data)
     } catch (err) {
-        this.emit('error', err)
+      this.emit('error', err)
     }
-  
+  }
 }
 
 // stream plumbing
-ReactNativePostMessageStream.prototype._read = noop
+PostMessageStream.prototype._read = noop
 
-ReactNativePostMessageStream.prototype._write = function (data, encoding, cb) {
+PostMessageStream.prototype._write = function (data, encoding, cb) {
   var message = {
     target: this._target,
     data: data,
