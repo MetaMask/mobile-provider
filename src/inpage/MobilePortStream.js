@@ -32,23 +32,16 @@ function MobilePortStream (port) {
  * @param {Object} msg - Payload from the onMessage listener of Port
  */
 MobilePortStream.prototype._onMessage = function (event) {
-    console.log('MobilePortStream onMessage', event);
     var msg = event.data
 
     // validate message
-    if (this._origin !== '*' && event.origin !== this._origin){console.log("discarded by origin", this._origin); return }
-    //if (event.source !== this._targetWindow){console.log("discarded by source n window", this._targetWindow); return }
-    if (typeof msg !== 'object'){console.log("discarded by typeof ms", msg); return }
-    if (typeof msg.data !== 'object'){console.log("discarded by typeof msg,data", msg.data); return }
-    if (msg.target && msg.target !== this._name){console.log("discarded by target/name", this._name); return }
-    if (!msg.data){console.log("discarded by !msg.data", msg.data); return }
+    if (this._origin !== '*' && event.origin !== this._origin){ return }
+    if (typeof msg !== 'object'){ return }
+    if (typeof msg.data !== 'object'){ return }
+    if (msg.target && msg.target !== this._name){ return }
+    if (!msg.data){ return }
     // Filter outgoing messages
-    if(msg.data.data && msg.data.data.toNative) {
-        console.log('discarded by to native');
-        return;
-    }
-
-    console.log('MobilePortStream onMessage:push', msg);
+    if(msg.data.data && msg.data.data.toNative) { return; }
 
     if (Buffer.isBuffer(msg)) {
         delete msg._isBuffer
@@ -85,17 +78,14 @@ MobilePortStream.prototype._read = noop
  * @param {Function} cb Called when writing is complete or an error occurs
  */
 MobilePortStream.prototype._write = function (msg, encoding, cb) {
-    console.log('MobilePortStream _write', msg);
 
   try {
     if (Buffer.isBuffer(msg)) {
       var data = msg.toJSON()
       data._isBuffer = true
-      console.log('MobilePortStream _write:postingMessage', data);
       window.ReactNativeWebView.postMessage({...data, origin: window.location.href});
     } else {
       if(msg.data)msg.data.toNative = true;
-      console.log('MobilePortStream _write:postingMessage', msg);
       window.ReactNativeWebView.postMessage({...msg, origin: window.location.href});
     }
   } catch (err) {
