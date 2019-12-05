@@ -10,11 +10,12 @@
     "obj-multiplex": "^1.0.0",
     "web3": "0.20.7",
     "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.10"
+    "webpack-cli": "^3.3.10",
+    "concat-cli": "^4.0.0"
   },
   "name": "metamask-mobile-provider",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:inpage": "cd src/inpage && npx webpack --config webpack.config.js",
@@ -25,8 +26,5 @@
   },
   "author": "",
   "license": "ISC",
-  "description": "",
-  "dependencies": {
-    "concat-cli": "^4.0.0"
-  }
+  "description": ""
 }

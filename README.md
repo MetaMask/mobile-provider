@@ -6,3 +6,10 @@ It includes `metamask-inpage-provider` and `web3` as a dependencies and it's int
 
 https://github.com/MetaMask/metamask-extension/blob/develop/app/scripts/contentscript.js
 
+
+To build this package you can run:
+
+`yarn install`
+
+`yarn bundle`
+
