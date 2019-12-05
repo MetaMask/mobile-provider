@@ -83,10 +83,10 @@ MobilePortStream.prototype._write = function (msg, encoding, cb) {
     if (Buffer.isBuffer(msg)) {
       var data = msg.toJSON()
       data._isBuffer = true
-      window.ReactNativeWebView.postMessage({...data, origin: window.location.href});
+      window.ReactNativeWebView.postMessage(JSON.stringify({...data, origin: window.location.href}));
     } else {
       if(msg.data)msg.data.toNative = true;
-      window.ReactNativeWebView.postMessage({...msg, origin: window.location.href});
+      window.ReactNativeWebView.postMessage(JSON.stringify({...msg, origin: window.location.href}));
     }
   } catch (err) {
     return cb(new Error('MobilePortStream - disconnected'))
