@@ -8,15 +8,20 @@
     "eslint": "^6.6.0",
     "metamask-inpage-provider": "^3.0.1",
     "obj-multiplex": "^1.0.0",
+    "web3": "0.20.7",
     "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.10"
+    "webpack-cli": "^3.3.10",
+    "concat-cli": "^4.0.0"
   },
   "name": "metamask-mobile-provider",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "bundle": "webpack --config webpack.config.js",
+    "build:inpage": "cd src/inpage && npx webpack --config webpack.config.js",
+    "bundle:inpage": "node src/content-script/wrapper.js",
+    "bundle:contentscript": "concat-cli -f src/content-script/inpage-bundle.js src/content-script/index.js -o dist/index.js",
+    "bundle": "yarn build:inpage && yarn bundle:inpage && yarn bundle:contentscript",
     "lint": "eslint"
   },
   "author": "",
