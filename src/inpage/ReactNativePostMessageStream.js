@@ -27,22 +27,22 @@ function PostMessageStream (opts) {
 
 // private
 PostMessageStream.prototype._onMessage = function (event) {
-  var msg = event.data
-  
+  const msg = event.data
+
   // validate message
-  if (this._origin !== '*' && event.origin !== this._origin){
+  if (this._origin !== '*' && event.origin !== this._origin) {
     return
   }
-  if (event.source !== this._targetWindow && window === top){ 
+  if (event.source !== this._targetWindow && window === top) {
     return
   }
-  if (typeof msg !== 'object'){
+  if (typeof msg !== 'object') {
     return
   }
-  if (msg.target !== this._name){
+  if (msg.target !== this._name) {
     return
   }
-  if (!msg.data){
+  if (!msg.data) {
     return
   }
 
@@ -70,8 +70,8 @@ PostMessageStream.prototype._onMessage = function (event) {
 // stream plumbing
 PostMessageStream.prototype._read = noop
 
-PostMessageStream.prototype._write = function (data, encoding, cb) {
-  var message = {
+PostMessageStream.prototype._write = function (data, _encoding, cb) {
+  const message = {
     target: this._target,
     data: data,
   }

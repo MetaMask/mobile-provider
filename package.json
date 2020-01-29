@@ -1,18 +1,4 @@
 {
-  "devDependencies": {
-    "@babel/core": "^7.7.2",
-    "@babel/plugin-proposal-class-properties": "^7.7.0",
-    "@babel/plugin-proposal-object-rest-spread": "^7.6.2",
-    "@babel/preset-env": "^7.7.1",
-    "babel-loader": "^8.0.6",
-    "eslint": "^6.6.0",
-    "metamask-inpage-provider": "^3.0.1",
-    "obj-multiplex": "^1.0.0",
-    "web3": "0.20.7",
-    "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.10",
-    "concat-cli": "^4.0.0"
-  },
   "name": "metamask-mobile-provider",
   "version": "1.0.0",
   "main": "dist/index.js",
@@ -22,9 +8,25 @@
     "bundle:inpage": "node src/content-script/wrapper.js",
     "bundle:contentscript": "concat-cli -f src/content-script/inpage-bundle.js src/content-script/index.js -o dist/index.js",
     "bundle": "yarn build:inpage && yarn bundle:inpage && yarn bundle:contentscript",
-    "lint": "eslint"
+    "lint": "eslint .",
+    "lint:fix": "eslint ."
   },
-  "author": "",
+  "author": "MetaMask",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "@babel/core": "^7.7.2",
+    "@babel/plugin-proposal-class-properties": "^7.7.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.6.2",
+    "@babel/preset-env": "^7.7.1",
+    "@metamask/eslint-config": "^1.0.0",
+    "babel-loader": "^8.0.6",
+    "concat-cli": "^4.0.0",
+    "eslint": "^6.8.0",
+    "metamask-inpage-provider": "^3.0.1",
+    "obj-multiplex": "^1.0.0",
+    "web3": "0.20.7",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
+  }
 }

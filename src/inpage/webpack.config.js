@@ -1,10 +1,8 @@
 // Webpack uses this to work with directories
-// eslint-disable-next-line import/no-commonjs
-const path = require('path');
+const path = require('path')
 
 // This is main configuration object.
 // Here you write different options and tell Webpack what to do
-// eslint-disable-next-line import/no-commonjs
 module.exports = {
 
   // Path to your entry point. From this file Webpack will begin his work
@@ -14,8 +12,8 @@ module.exports = {
   // Webpack will bundle all JavaScript into this file
   output: {
     // eslint-disable-next-line no-undef
-    path: path.resolve(__dirname,'..','..','dist'),
-    filename: 'inpage.js'
+    path: path.resolve(__dirname, '..', '..', 'dist'),
+    filename: 'inpage.js',
   },
 
   // Default mode for Webpack is production.
@@ -25,18 +23,17 @@ module.exports = {
   mode: 'production',
   module: {
     rules: [
-		{
-			test: /\.(js|jsx)$/,
-			exclude: /node_modules/,
-			use: {
-				loader: 'babel-loader',
-				options: {
-					presets: ['@babel/preset-env'],
-					plugins: ['@babel/plugin-proposal-object-rest-spread', '@babel/plugin-proposal-class-properties']
-				}
-			}
-		}
-    ]
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env'],
+            plugins: ['@babel/plugin-proposal-object-rest-spread', '@babel/plugin-proposal-class-properties'],
+          },
+        },
+      },
+    ],
   },
-
-};
+}
