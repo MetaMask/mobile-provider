@@ -8,6 +8,9 @@ module.exports = {
     '@metamask/eslint-config',
     '@metamask/eslint-config/config/nodejs',
   ],
+  plugins: [
+    'json',
+  ],
   globals: {
     Atomics: 'readonly',
     Buffer: 'readonly',

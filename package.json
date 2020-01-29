@@ -8,12 +8,17 @@
     "bundle:inpage": "node src/content-script/wrapper.js",
     "bundle:contentscript": "concat-cli -f src/content-script/inpage-bundle.js src/content-script/index.js -o dist/index.js",
     "bundle": "yarn build:inpage && yarn bundle:inpage && yarn bundle:contentscript",
-    "lint": "eslint .",
-    "lint:fix": "eslint ."
+    "lint": "eslint . --ext js,json",
+    "lint:fix": "eslint . --ext js,json --fix"
   },
   "author": "MetaMask",
   "license": "ISC",
   "description": "",
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn bundle"
+    }
+  },
   "devDependencies": {
     "@babel/core": "^7.7.2",
     "@babel/plugin-proposal-class-properties": "^7.7.0",
@@ -23,7 +28,9 @@
     "babel-loader": "^8.0.6",
     "concat-cli": "^4.0.0",
     "eslint": "^6.8.0",
-    "metamask-inpage-provider": "^3.0.1",
+    "eslint-plugin-json": "^2.0.1",
+    "husky": "^4.2.1",
+    "metamask-inpage-provider": "^4.0.3",
     "obj-multiplex": "^1.0.0",
     "web3": "0.20.7",
     "webpack": "^4.41.2",

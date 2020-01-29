@@ -7,14 +7,19 @@
  */
 function injectScript (content) {
   try {
+
     const container = document.head || document.documentElement
+
+    // synchronously execute script in page context
     const scriptTag = document.createElement('script')
     scriptTag.setAttribute('async', false)
     scriptTag.textContent = content
     container.insertBefore(scriptTag, container.children[0])
+
+    // script executed; remove script element from DOM
     container.removeChild(scriptTag)
-  } catch (e) {
-    console.error('MetaMask script injection failed', e)
+  } catch (err) {
+    console.error('MetaMask script injection failed', err)
   }
 }
 
