@@ -3,7 +3,7 @@ const path = require('path')
 
 // This is main configuration object.
 // Here you write different options and tell Webpack what to do
-module.exports = {
+const config = {
 
   // Path to your entry point. From this file Webpack will begin his work
   entry: './index.js',
@@ -36,4 +36,13 @@ module.exports = {
       },
     ],
   },
+}
+
+module.exports = (_env, argv) => {
+
+  if (argv.mode === 'development') {
+    config.mode = 'development'
+  }
+
+  return config
 }
