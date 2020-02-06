@@ -10,7 +10,7 @@ const metamaskStream = new ReactNativePostMessageStream({
   target: 'contentscript',
 })
 
-window.inpageProvider = new MetamaskInpageProvider(metamaskStream)
+window.inpageProvider = new MetamaskInpageProvider(metamaskStream, false)
 
 // compose the inpage provider
 // set a high max listener count to avoid unnecesary warnings
@@ -18,13 +18,12 @@ window.inpageProvider.setMaxListeners(100)
 
 // Work around for web3@1.0 deleting the bound `sendAsync` but not the unbound
 // `sendAsync` method on the prototype, causing `this` reference issues
-window.proxiedInpageProvider = new Proxy(window.inpageProvider, {
+window.ethereum = new Proxy(window.inpageProvider, {
   // straight up lie that we deleted the property so that it doesnt
   // throw an error in strict mode
   deleteProperty: () => true,
 })
-
-window.ethereum = window.proxiedInpageProvider
+delete window.inpageProvider
 
 window.setupStreams = function () {
   // the transport-specific streams for communication between inpage and background
