@@ -5,9 +5,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:inpage": "cd src/inpage && npx webpack --config webpack.config.js",
+    "build:dev:inpage": "cd src/inpage && npx webpack --mode=development --config webpack.config.js",
     "bundle:inpage": "node src/content-script/wrapper.js",
     "bundle:contentscript": "concat-cli -f src/content-script/inpage-bundle.js src/content-script/index.js -o dist/index.js",
     "bundle": "yarn build:inpage && yarn bundle:inpage && yarn bundle:contentscript",
+    "bundle:dev": "yarn build:dev:inpage && yarn bundle:inpage && yarn bundle:contentscript",
     "lint": "eslint . --ext js,json",
     "lint:fix": "eslint . --ext js,json --fix"
   },
