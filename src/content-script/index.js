@@ -161,7 +161,7 @@ if (shouldInjectWeb3()) {
           data.networkVersion !== window.ethereum.networkVersion ||
           data.chainId !== window.ethereum.chainId
         ) {
-          window.ethereum.publicConfigStore.emit('update', message.data.data)
+          window.ethereum._publicConfigStore.emit('update', message.data.data)
         }
       }
     })

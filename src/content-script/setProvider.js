@@ -11,9 +11,7 @@ function setupDappAutoReload (web3, observable) {
       lastTimeUsed = Date.now()
       // show warning once on web3 access
       if (!hasBeenWarned && key !== 'currentProvider') {
-        console.warn(
-          'MetaMask: web3 will be deprecated in the near future in favor of the ethereumProvider\nhttps://medium.com/metamask/4a899ad6e59e',
-        )
+        console.warn(`MetaMask: In Q1 2020, MetaMask will no longer inject web3. For more information, see: https://medium.com/metamask/no-longer-injecting-web3-js-4a899ad6e59e`)
         hasBeenWarned = true
       }
       // return value normally
@@ -87,15 +85,15 @@ if (typeof window.web3 !== 'undefined') {
 	   Please remove one and try again.`)
 }
 
-const web3 = new Web3(window.proxiedInpageProvider)
+const web3 = new Web3(window.ethereum)
 web3.setProvider = function () {
   console.debug('MetaMask - overrode web3.setProvider')
 }
 console.debug('MetaMask - injected web3')
 
-setupDappAutoReload(web3, window.inpageProvider.publicConfigStore)
+setupDappAutoReload(web3, window.ethereum._publicConfigStore)
 
 // set web3 defaultAccount
-window.inpageProvider.publicConfigStore.subscribe(state => {
+window.ethereum._publicConfigStore.subscribe(state => {
   web3.eth.defaultAccount = state.selectedAddress
 })
