@@ -1935,6 +1935,13 @@ eth-json-rpc-errors@^2.0.0:
   dependencies:
     fast-safe-stringify "^2.0.6"
 
+eth-json-rpc-errors@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/eth-json-rpc-errors/-/eth-json-rpc-errors-2.0.1.tgz#e7a4c4e3c76913dff26dbc021966c72b2822e0f2"
+  integrity sha512-ldF9fdzkdHAgTWmqh/bgHi7uH+8icAyjcEdFOBGD32zTWd7J66VDo0rBaiaQPowXitiyAcs1R23Mje1gkdIofA==
+  dependencies:
+    fast-safe-stringify "^2.0.6"
+
 events@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/events/-/events-3.0.0.tgz#9a0a0dfaf62893d92b875b8f2698ca4114973e88"
@@ -2959,12 +2966,12 @@ memory-fs@^0.5.0:
     errno "^0.1.3"
     readable-stream "^2.0.1"
 
-metamask-inpage-provider@^4.0.4:
-  version "4.0.4"
-  resolved "https://registry.yarnpkg.com/metamask-inpage-provider/-/metamask-inpage-provider-4.0.4.tgz#697121873bf686a1fddc671832d9adbceda4c9ae"
-  integrity sha512-DCuqQ1NpAScesjvJac+8k4SbKzgcbmP78sAvo96i04qIszzH0LMg0dZLEViTz6/uqM7nU6JO3NIAcNF3iA2Lpw==
+metamask-inpage-provider@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/metamask-inpage-provider/-/metamask-inpage-provider-4.1.0.tgz#257aa8c7d4d0966b15f93824104d442d8e324e74"
+  integrity sha512-BWoc0iWcRO7oePXFhPLQG6OBcr/1gG3FyRV5xh5y/vqtNwzdHbTqV/RmPTB6UwrKmy+v1d/YW8w5BpslL5CqiQ==
   dependencies:
-    eth-json-rpc-errors "^2.0.0"
+    eth-json-rpc-errors "^2.0.1"
     fast-deep-equal "^2.0.1"
     json-rpc-engine "^5.1.5"
     json-rpc-middleware-stream "^2.1.1"

@@ -32,7 +32,7 @@
     "eslint": "^6.8.0",
     "eslint-plugin-json": "^2.0.1",
     "husky": "^4.2.1",
-    "metamask-inpage-provider": "^4.0.4",
+    "metamask-inpage-provider": "^4.1.0",
     "obj-multiplex": "^1.0.0",
     "web3": "0.20.7",
     "webpack": "^4.41.2",
