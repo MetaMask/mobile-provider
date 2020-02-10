@@ -2966,10 +2966,10 @@ memory-fs@^0.5.0:
     errno "^0.1.3"
     readable-stream "^2.0.1"
 
-metamask-inpage-provider@^4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/metamask-inpage-provider/-/metamask-inpage-provider-4.1.0.tgz#257aa8c7d4d0966b15f93824104d442d8e324e74"
-  integrity sha512-BWoc0iWcRO7oePXFhPLQG6OBcr/1gG3FyRV5xh5y/vqtNwzdHbTqV/RmPTB6UwrKmy+v1d/YW8w5BpslL5CqiQ==
+metamask-inpage-provider@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/metamask-inpage-provider/-/metamask-inpage-provider-4.1.1.tgz#6fb5544ade2e7828b961451f8a45e4025e964eb5"
+  integrity sha512-EQs7GjcD8W3zv0x5wzC6OQdP/G1VlTXlLiW/IU/Y91xw134ZzxTnyOteSSYI3W1JEN3fKQ0B/dUd880b2dTT0A==
   dependencies:
     eth-json-rpc-errors "^2.0.1"
     fast-deep-equal "^2.0.1"
