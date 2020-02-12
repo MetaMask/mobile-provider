@@ -38,16 +38,13 @@ MobilePortStream.prototype._onMessage = function (event) {
   if (this._origin !== '*' && event.origin !== this._origin) {
     return
   }
-  if (typeof msg !== 'object') {
+  if (!msg || typeof msg !== 'object') {
     return
   }
-  if (typeof msg.data !== 'object') {
+  if (!msg.data || typeof msg.data !== 'object') {
     return
   }
   if (msg.target && msg.target !== this._name) {
-    return
-  }
-  if (!msg.data) {
     return
   }
   // Filter outgoing messages

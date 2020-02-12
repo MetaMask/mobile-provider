@@ -36,7 +36,7 @@ PostMessageStream.prototype._onMessage = function (event) {
   if (event.source !== this._targetWindow && window === top) {
     return
   }
-  if (typeof msg !== 'object') {
+  if (!msg || typeof msg !== 'object') {
     return
   }
   if (msg.target !== this._name) {
