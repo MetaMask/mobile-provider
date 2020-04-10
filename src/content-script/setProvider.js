@@ -1,17 +1,52 @@
-function setupDappAutoReload (web3, observable) {
-  // export web3 as a window, checking for usage
-  let reloadInProgress = false
-  let lastTimeUsed
-  let lastSeenNetwork
+/* global Web3 */
+
+let lastTimeUsed
+let didInjectWeb3 = false
+
+if (!window.chrome) {
+  window.chrome = { webstore: true }
+}
+
+// inject web3
+if (window.web3) {
+  console.warn(`MetaMask detected another web3.
+    MetaMask may not work reliably with web3 versions other than 0.20.7.`)
+} else {
+
+  window.web3 = new Web3(window.ethereum)
+
+  window.web3.setProvider = function () {
+    console.debug('MetaMask - overrode web3.setProvider')
+  }
+
+  setupWeb3AccountSync()
+  setWeb3AsProxy()
+  didInjectWeb3 = true
+
+  console.debug('MetaMask - injected web3')
+}
+
+setupDappAutoReload(window.ethereum._publicConfigStore)
+
+// functions
+
+function setupWeb3AccountSync () {
+  // set web3 defaultAccount
+  window.ethereum._publicConfigStore.subscribe(state => {
+    window.web3.eth.defaultAccount = state.selectedAddress
+  })
+}
+
+function setWeb3AsProxy () {
   let hasBeenWarned = false
 
-  window.web3 = new Proxy(web3, {
+  window.web3 = new Proxy(window.web3, {
     get: (_web3, key) => {
       // get the time of use
       lastTimeUsed = Date.now()
       // show warning once on web3 access
       if (!hasBeenWarned && key !== 'currentProvider') {
-        console.warn(`MetaMask: In Q1 2020, MetaMask will no longer inject web3. For more information, see: https://medium.com/metamask/no-longer-injecting-web3-js-4a899ad6e59e`)
+        console.warn(`MetaMask: MetaMask will soon stop injecting web3. For more information, see: https://medium.com/metamask/no-longer-injecting-web3-js-4a899ad6e59e`)
         hasBeenWarned = true
       }
       // return value normally
@@ -22,6 +57,13 @@ function setupDappAutoReload (web3, observable) {
       _web3[key] = value
     },
   })
+
+}
+
+function setupDappAutoReload (observable) {
+  // export web3 as a window, checking for usage
+  let reloadInProgress = false
+  let lastSeenNetwork
 
   observable.subscribe(state => {
     // if the auto refresh on network change is false do not
@@ -44,7 +86,7 @@ function setupDappAutoReload (web3, observable) {
     }
 
     // skip reload logic if web3 not used
-    if (!lastTimeUsed) {
+    if (!didInjectWeb3) {
       return
     }
 
@@ -69,31 +111,3 @@ function setupDappAutoReload (web3, observable) {
 function triggerReset () {
   window.location.reload()
 }
-
-/* eslint-disable no-undef */
-if (!window.chrome) {
-  window.chrome = { webstore: true }
-}
-
-//
-// setup web3
-//
-
-if (typeof window.web3 !== 'undefined') {
-  throw new Error(`MetaMask detected another web3.
-	   MetaMask will not work reliably with another web3.
-	   Please remove one and try again.`)
-}
-
-const web3 = new Web3(window.ethereum)
-web3.setProvider = function () {
-  console.debug('MetaMask - overrode web3.setProvider')
-}
-console.debug('MetaMask - injected web3')
-
-setupDappAutoReload(web3, window.ethereum._publicConfigStore)
-
-// set web3 defaultAccount
-window.ethereum._publicConfigStore.subscribe(state => {
-  web3.eth.defaultAccount = state.selectedAddress
-})
