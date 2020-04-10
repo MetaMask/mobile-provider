@@ -9,11 +9,8 @@ if (!window.chrome) {
 
 // inject web3
 if (window.web3) {
-
   console.warn(`MetaMask detected another web3.
     MetaMask may not work reliably with web3 versions other than 0.20.7.`)
-
-  setupWeb3AccountSync()
 } else {
 
   window.web3 = new Web3(window.ethereum)
