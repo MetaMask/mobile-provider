@@ -1,5 +1,5 @@
 
-const MetamaskInpageProvider = require('metamask-inpage-provider')
+const { initProvider } = require('@metamask/inpage-provider')
 const ObjectMultiplex = require('obj-multiplex')
 const pump = require('pump')
 const MobilePortStream = require('./MobilePortStream')
@@ -10,24 +10,9 @@ const metamaskStream = new ReactNativePostMessageStream({
   target: 'contentscript',
 })
 
-function setupProvider () {
-
-  const inpageProvider = new MetamaskInpageProvider(metamaskStream, false)
-
-  // compose the inpage provider
-  // set a high max listener count to avoid unnecesary warnings
-  inpageProvider.setMaxListeners(100)
-
-  // Work around for web3@1.0 deleting the bound `sendAsync` but not the unbound
-  // `sendAsync` method on the prototype, causing `this` reference issues
-  window.ethereum = new Proxy(inpageProvider, {
-    // straight up lie that we deleted the property so that it doesnt
-    // throw an error in strict mode
-    deleteProperty: () => true,
-  })
-}
-
-setupProvider()
+initProvider({
+  connectionStream: metamaskStream,
+})
 
 window.setupStreams = function () {
   // the transport-specific streams for communication between inpage and background
