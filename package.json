@@ -1,6 +1,6 @@
 {
-  "name": "metamask-mobile-provider",
-  "version": "1.1.0",
+  "name": "@metamask/mobile-provider",
+  "version": "1.2.0",
   "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -13,9 +13,17 @@
     "lint": "eslint . --ext js,json",
     "lint:fix": "eslint . --ext js,json --fix"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MetaMask/mobile-provider.git"
+  },
   "author": "MetaMask",
   "license": "ISC",
-  "description": "",
+  "description": "The JavaScript injected into every web page in the MetaMask Mobile browser.",
+  "bugs": {
+    "url": "https://github.com/MetaMask/mobile-provider/issues"
+  },
+  "homepage": "https://github.com/MetaMask/mobile-provider#readme",
   "husky": {
     "hooks": {
       "pre-commit": "yarn bundle"
