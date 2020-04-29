@@ -12,6 +12,7 @@ const metamaskStream = new ReactNativePostMessageStream({
 
 initProvider({
   connectionStream: metamaskStream,
+  shouldSendMetadata: false,
 })
 
 window.setupStreams = function () {
