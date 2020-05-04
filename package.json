@@ -29,6 +29,9 @@
       "pre-commit": "yarn bundle"
     }
   },
+  "files": [
+    "dist/index.js"
+  ],
   "devDependencies": {
     "@babel/core": "^7.7.2",
     "@babel/plugin-proposal-class-properties": "^7.7.0",
