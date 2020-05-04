@@ -682,6 +682,21 @@
   resolved "https://registry.yarnpkg.com/@metamask/eslint-config/-/eslint-config-1.0.0.tgz#046012398bb27f56395355c96ef07152925043b7"
   integrity sha512-MmxM2sknVhIHyXCjR6LcK57OPJ30gTEX5v/jwC+qXuw4GIgUAPbxFp3AFmFRAJwty3RMjJSbRJ7YlamMq67U8w==
 
+"@metamask/inpage-provider@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@metamask/inpage-provider/-/inpage-provider-5.0.0.tgz#f3961ceb02821255785fe20b1b676bfd944532d7"
+  integrity sha512-DjQy/hJPKwEhk+L/XPHfR6bSTWsGGXjHCQ3Q/LgieQX/Kv91yyMu+QUu+tWuVi0qX0dSRmaTnFNCF9FWNV1XgA==
+  dependencies:
+    eth-json-rpc-errors "^2.0.2"
+    fast-deep-equal "^2.0.1"
+    json-rpc-engine "^5.1.5"
+    json-rpc-middleware-stream "^2.1.1"
+    loglevel "^1.6.1"
+    obj-multiplex "^1.0.0"
+    obs-store "^4.0.3"
+    pump "^3.0.0"
+    safe-event-emitter "^1.0.1"
+
 "@types/color-name@^1.1.1":
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/@types/color-name/-/color-name-1.1.1.tgz#1c1261bbeaa10a8055bbc5d8ab84b7b2afc846a0"
@@ -2965,21 +2980,6 @@ memory-fs@^0.5.0:
   dependencies:
     errno "^0.1.3"
     readable-stream "^2.0.1"
-
-metamask-inpage-provider@^4.1.2:
-  version "4.1.2"
-  resolved "https://registry.yarnpkg.com/metamask-inpage-provider/-/metamask-inpage-provider-4.1.2.tgz#8068004d51160dc5869c5aa881074284b8db03da"
-  integrity sha512-HLCW4DdvubLGntez5yB6kOqvptnpgUcUaRenEwzqN+hHQMnA2+1mNLp5IYks30kvX/fI2ACJgekFwIRDFWA9gQ==
-  dependencies:
-    eth-json-rpc-errors "^2.0.2"
-    fast-deep-equal "^2.0.1"
-    json-rpc-engine "^5.1.5"
-    json-rpc-middleware-stream "^2.1.1"
-    loglevel "^1.6.1"
-    obj-multiplex "^1.0.0"
-    obs-store "^4.0.3"
-    pump "^3.0.0"
-    safe-event-emitter "^1.0.1"
 
 micromatch@^3.0.4, micromatch@^3.1.10, micromatch@^3.1.4:
   version "3.1.10"
