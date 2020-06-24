@@ -682,10 +682,10 @@
   resolved "https://registry.yarnpkg.com/@metamask/eslint-config/-/eslint-config-1.0.0.tgz#046012398bb27f56395355c96ef07152925043b7"
   integrity sha512-MmxM2sknVhIHyXCjR6LcK57OPJ30gTEX5v/jwC+qXuw4GIgUAPbxFp3AFmFRAJwty3RMjJSbRJ7YlamMq67U8w==
 
-"@metamask/inpage-provider@^5.0.2":
-  version "5.0.2"
-  resolved "https://registry.yarnpkg.com/@metamask/inpage-provider/-/inpage-provider-5.0.2.tgz#093f219d9d9e375cf0c8a353db64886faca1aacf"
-  integrity sha512-uTyWmFc7CHLvwLIwYdZRvK4Qj7RsOy+4pH2GC9rvyjAwG9+ujHeEkPNZK6sqEhWcvtjga49SW+9sQbYO/9UNPQ==
+"@metamask/inpage-provider@^5.2.0":
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/@metamask/inpage-provider/-/inpage-provider-5.2.0.tgz#a288d473e7374b1b227ea70d888e258854378c28"
+  integrity sha512-KyMfHcu3LqgxqS2hsxUxfIDjBQRJwOwhK6wOxOtAIRQLz4+Rns0Xt5R/Nk//U/JEskrHnNadTBgWOFCp3YzgJQ==
   dependencies:
     eth-json-rpc-errors "^2.0.2"
     fast-deep-equal "^2.0.1"
