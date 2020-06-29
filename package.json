@@ -38,7 +38,7 @@
     "@babel/plugin-proposal-object-rest-spread": "^7.6.2",
     "@babel/preset-env": "^7.7.1",
     "@metamask/eslint-config": "^1.0.0",
-    "@metamask/inpage-provider": "^5.2.0",
+    "@metamask/inpage-provider": "^5.2.1",
     "babel-loader": "^8.0.6",
     "concat-cli": "^4.0.0",
     "eslint": "^6.8.0",
