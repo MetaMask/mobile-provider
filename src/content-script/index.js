@@ -137,33 +137,4 @@ async function start () {
 if (shouldInjectWeb3()) {
   injectScript(inpageBundle)
   start()
-  if (window !== top) {
-    window.ReactNativeWebView && window.ReactNativeWebView.postMessage(JSON.stringify(
-      {
-        type: 'FRAME_READY',
-        payload: {
-          url: window.location.href,
-        },
-      },
-    ))
-
-    window.addEventListener('message', message => {
-      if (message.data.name === 'publicConfig') {
-
-        // Manual update for Iframes
-        const { data } = message.data
-
-        if (
-          data.isUnlocked !== window.ethereum.isUnlocked ||
-          data.isEnabled !== window.ethereum.isEnabled ||
-          data.selectedAddress !== window.ethereum.selectedAddress ||
-          data.networkVersion !== window.ethereum.networkVersion ||
-          data.networkVersion !== window.ethereum.networkVersion ||
-          data.chainId !== window.ethereum.chainId
-        ) {
-          window.ethereum._publicConfigStore.emit('update', message.data.data)
-        }
-      }
-    })
-  }
 }
