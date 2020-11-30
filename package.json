@@ -4,14 +4,15 @@
   "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "yarn build:inpage && yarn bundle:inpage && yarn bundle:contentscript",
     "build:inpage": "cd src/inpage && webpack --config webpack.config.js",
     "build:dev:inpage": "cd src/inpage && webpack --mode=development --config webpack.config.js",
-    "bundle:inpage": "node src/content-script/wrapper.js",
-    "bundle:contentscript": "concat-cli -f src/content-script/inpage-bundle.js src/content-script/index.js -o dist/index.js",
-    "bundle": "yarn build:inpage && yarn bundle:inpage && yarn bundle:contentscript",
+    "bundle:inpage": "node src/content-script/build.js",
+    "bundle:contentscript": "concat-cli -f dist/inpage-bundle.js src/content-script/index.js -o dist/index.js",
     "bundle:dev": "yarn build:dev:inpage && yarn bundle:inpage && yarn bundle:contentscript",
     "lint": "eslint . --ext js,json",
-    "lint:fix": "eslint . --ext js,json --fix"
+    "lint:fix": "eslint . --ext js,json --fix",
+    "prepare": "yarn build"
   },
   "repository": {
     "type": "git",
@@ -24,11 +25,6 @@
     "url": "https://github.com/MetaMask/mobile-provider/issues"
   },
   "homepage": "https://github.com/MetaMask/mobile-provider#readme",
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn bundle"
-    }
-  },
   "files": [
     "dist/index.js"
   ],
@@ -45,7 +41,6 @@
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-json": "^2.0.1",
     "eslint-plugin-node": "^11.1.0",
-    "husky": "^4.2.1",
     "obj-multiplex": "^1.0.0",
     "pump": "^3.0.0",
     "readable-stream": "^2.3.7",

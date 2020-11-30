@@ -13,7 +13,7 @@ const config = {
   output: {
     // eslint-disable-next-line no-undef
     path: path.resolve(__dirname, '..', '..', 'dist'),
-    filename: 'inpage.js',
+    filename: 'inpage-content.js',
   },
 
   // Default mode for Webpack is production.

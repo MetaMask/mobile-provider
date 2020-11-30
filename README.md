@@ -7,5 +7,5 @@ It includes `@metamask/inpage-provider` as a dependencies and it's intended to b
 To build this package you can run:
 
 ```shell
-yarn && yarn bundle
+yarn && yarn build
 ```

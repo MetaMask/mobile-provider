@@ -44,7 +44,7 @@ jobs:
           at: .
       - run:
           name: build
-          command: yarn bundle
+          command: yarn build
 
   test-lint:
     docker:
