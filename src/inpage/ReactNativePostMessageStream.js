@@ -1,12 +1,14 @@
-const DuplexStream = require('readable-stream').Duplex
-const inherits = require('util').inherits
+const { inherits } = require('util')
+const { Duplex } = require('readable-stream')
+
+const noop = () => undefined
 
 module.exports = PostMessageStream
 
-inherits(PostMessageStream, DuplexStream)
+inherits(PostMessageStream, Duplex)
 
 function PostMessageStream (opts) {
-  DuplexStream.call(this, {
+  Duplex.call(this, {
     objectMode: true,
   })
 
@@ -46,24 +48,22 @@ PostMessageStream.prototype._onMessage = function (event) {
     return
   }
 
-  if (!this._init) {
-    if (msg.data === 'SYN') {
-      this._haveSyn = true
-      this._write('ACK', null, noop)
-    } else if (msg.data === 'ACK') {
-      this._init = true
-      if (!this._haveSyn) {
-        this._write('ACK', null, noop)
-      }
-      this.uncork()
-    }
-  } else {
+  if (this._init) {
     // forward message
     try {
       this.push(msg.data)
     } catch (err) {
       this.emit('error', err)
     }
+  } else if (msg.data === 'SYN') {
+    this._haveSyn = true
+    this._write('ACK', null, noop)
+  } else if (msg.data === 'ACK') {
+    this._init = true
+    if (!this._haveSyn) {
+      this._write('ACK', null, noop)
+    }
+    this.uncork()
   }
 }
 
@@ -73,12 +73,8 @@ PostMessageStream.prototype._read = noop
 PostMessageStream.prototype._write = function (data, _encoding, cb) {
   const message = {
     target: this._target,
-    data: data,
+    data,
   }
   this._targetWindow.postMessage(message, this._origin)
   cb()
 }
-
-// util
-
-function noop () {}

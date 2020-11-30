@@ -1,4 +1,3 @@
-
 const { initProvider } = require('@metamask/inpage-provider')
 const ObjectMultiplex = require('obj-multiplex')
 const pump = require('pump')
@@ -77,7 +76,7 @@ function forwardTrafficBetweenMuxes (channelName, muxA, muxB) {
 function logStreamDisconnectWarning (remoteLabel, err) {
   let warningMsg = `MetamaskContentscript - lost connection to ${remoteLabel}`
   if (err) {
-    warningMsg += '\n' + err.stack
+    warningMsg += `\n${err.stack}`
   }
   console.warn(warningMsg)
   console.error(err)
