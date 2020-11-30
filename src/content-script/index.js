@@ -39,12 +39,12 @@ function shouldInject () {
  * @returns {boolean} {@code true} if the doctype is html or if none exists
  */
 function doctypeCheck () {
-  const doctype = window.document.doctype
+  const { doctype } = window.document
   if (doctype) {
     return doctype.name === 'html'
-  } else {
-    return true
   }
+  return true
+
 }
 
 /**
@@ -59,8 +59,8 @@ function doctypeCheck () {
  */
 function suffixCheck () {
   const prohibitedTypes = [
-    /\\.xml$/,
-    /\\.pdf$/,
+    /\\.xml$/u,
+    /\\.pdf$/u,
   ]
   const currentUrl = window.location.pathname
   for (let i = 0; i < prohibitedTypes.length; i++) {
@@ -106,7 +106,7 @@ function blacklistedDomainCheck () {
   let currentRegex
   for (let i = 0; i < blacklistedDomains.length; i++) {
     const blacklistedDomain = blacklistedDomains[i].replace('.', '\\.')
-    currentRegex = new RegExp('(?:https?:\\/\\/)(?:(?!' + blacklistedDomain + ').)*$')
+    currentRegex = new RegExp(`(?:https?:\\/\\/)(?:(?!${blacklistedDomain}).)*$`, 'u')
     if (!currentRegex.test(currentUrl)) {
       return true
     }
@@ -123,7 +123,7 @@ async function domIsReady () {
     return
   }
   // wait for load
-  await new Promise(resolve => window.addEventListener('DOMContentLoaded', resolve, { once: true }))
+  await new Promise((resolve) => window.addEventListener('DOMContentLoaded', resolve, { once: true }))
 }
 
 /**

@@ -1,6 +1,7 @@
-const Duplex = require('readable-stream').Duplex
-const inherits = require('util').inherits
-const noop = function () {}
+const { inherits } = require('util')
+const { Duplex } = require('readable-stream')
+
+const noop = () => undefined
 
 module.exports = MobilePortStream
 
@@ -54,7 +55,7 @@ MobilePortStream.prototype._onMessage = function (event) {
 
   if (Buffer.isBuffer(msg)) {
     delete msg._isBuffer
-    const data = new Buffer(msg)
+    const data = Buffer.from(msg)
     this.push(data)
   } else {
     this.push(msg)
@@ -75,7 +76,6 @@ MobilePortStream.prototype._onDisconnect = function () {
  * Explicitly sets read operations to a no-op
  */
 MobilePortStream.prototype._read = noop
-
 
 /**
  * Called internally when data should be written to
@@ -102,5 +102,5 @@ MobilePortStream.prototype._write = function (msg, _encoding, cb) {
   } catch (err) {
     return cb(new Error('MobilePortStream - disconnected'))
   }
-  cb()
+  return cb()
 }

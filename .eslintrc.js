@@ -19,7 +19,9 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 2018,
   },
-  rules: {},
+  rules: {
+    'node/no-sync': 'off',
+  },
   ignorePatterns: [
     '!.eslintrc.js',
     'dist/',
