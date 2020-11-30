@@ -48,7 +48,6 @@ window.setupStreams = function () {
 
   // forward communication across inpage-background for these channels only
   forwardTrafficBetweenMuxes('provider', pageMux, appMux)
-  forwardTrafficBetweenMuxes('publicConfig', pageMux, appMux)
 }
 
 /**
