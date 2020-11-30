@@ -39,7 +39,6 @@ const config = {
 }
 
 module.exports = (_env, argv) => {
-
   if (argv.mode === 'development') {
     config.mode = 'development'
   }
