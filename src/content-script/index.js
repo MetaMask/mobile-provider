@@ -131,7 +131,7 @@ async function domIsReady () {
  */
 async function start () {
   await domIsReady()
-  window.setupStreams()
+  window._metamaskSetupProvider()
 }
 
 if (shouldInject()) {
