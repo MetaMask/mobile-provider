@@ -30,7 +30,7 @@ function injectScript (content) {
  */
 function shouldInject () {
   return doctypeCheck() && suffixCheck() &&
-    documentElementCheck() && !blacklistedDomainCheck()
+    documentElementCheck() && !blockedDomainCheck()
 }
 
 /**
@@ -44,7 +44,6 @@ function doctypeCheck () {
     return doctype.name === 'html'
   }
   return true
-
 }
 
 /**
@@ -85,12 +84,12 @@ function documentElementCheck () {
 }
 
 /**
- * Checks if the current domain is blacklisted
+ * Checks if the current domain is blocked
  *
- * @returns {boolean} {@code true} if the current domain is blacklisted
+ * @returns {boolean} {@code true} if the current domain is blocked
  */
-function blacklistedDomainCheck () {
-  const blacklistedDomains = [
+function blockedDomainCheck () {
+  const blockedDomains = [
     'uscourts.gov',
     'dropbox.com',
     'webbyawards.com',
@@ -104,9 +103,9 @@ function blacklistedDomainCheck () {
   ]
   const currentUrl = window.location.href
   let currentRegex
-  for (let i = 0; i < blacklistedDomains.length; i++) {
-    const blacklistedDomain = blacklistedDomains[i].replace('.', '\\.')
-    currentRegex = new RegExp(`(?:https?:\\/\\/)(?:(?!${blacklistedDomain}).)*$`, 'u')
+  for (let i = 0; i < blockedDomains.length; i++) {
+    const blockedDomain = blockedDomains[i].replace('.', '\\.')
+    currentRegex = new RegExp(`(?:https?:\\/\\/)(?:(?!${blockedDomain}).)*$`, 'u')
     if (!currentRegex.test(currentUrl)) {
       return true
     }

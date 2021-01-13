@@ -26,6 +26,5 @@ module.exports = {
     '!.eslintrc.js',
     'dist/',
     'node_modules/',
-    'inpage-bundle.js',
   ],
 }

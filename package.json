@@ -4,14 +4,18 @@
   "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "yarn build:prep && yarn build:inpage && yarn build:contentscript && yarn build:concat && yarn build:bundle",
+    "build:prep": "mkdir -p dist && rm -rf dist/*",
     "build:inpage": "cd src/inpage && webpack --config webpack.config.js",
+    "build:contentscript": "node src/content-script/build.js",
+    "build:concat": "concat-cli -f dist/inpage-bundle.js src/content-script/index.js -o dist/index-raw.js",
+    "build:bundle": "webpack --config webpack.config.js",
+    "build:dev": "yarn build:prep && yarn build:dev:inpage && yarn build:contentscript && yarn build:concat && yarn build:dev:bundle",
     "build:dev:inpage": "cd src/inpage && webpack --mode=development --config webpack.config.js",
-    "bundle:inpage": "node src/content-script/wrapper.js",
-    "bundle:contentscript": "concat-cli -f src/content-script/inpage-bundle.js src/content-script/index.js -o dist/index.js",
-    "bundle": "yarn build:inpage && yarn bundle:inpage && yarn bundle:contentscript",
-    "bundle:dev": "yarn build:dev:inpage && yarn bundle:inpage && yarn bundle:contentscript",
+    "build:dev:bundle": "webpack --mode=development --config webpack.config.js",
     "lint": "eslint . --ext js,json",
-    "lint:fix": "eslint . --ext js,json --fix"
+    "lint:fix": "eslint . --ext js,json --fix",
+    "prepublishOnly": "yarn build"
   },
   "repository": {
     "type": "git",
@@ -24,11 +28,6 @@
     "url": "https://github.com/MetaMask/mobile-provider/issues"
   },
   "homepage": "https://github.com/MetaMask/mobile-provider#readme",
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn bundle"
-    }
-  },
   "files": [
     "dist/index.js"
   ],
@@ -45,7 +44,6 @@
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-json": "^2.0.1",
     "eslint-plugin-node": "^11.1.0",
-    "husky": "^4.2.1",
     "obj-multiplex": "^1.0.0",
     "pump": "^3.0.0",
     "readable-stream": "^2.3.7",
