@@ -15,7 +15,7 @@
     "build:dev:bundle": "webpack --mode=development --config webpack.config.js",
     "lint": "eslint . --ext js,json",
     "lint:fix": "eslint . --ext js,json --fix",
-    "prepare": "yarn build"
+    "prepublishOnly": "yarn build"
   },
   "repository": {
     "type": "git",
