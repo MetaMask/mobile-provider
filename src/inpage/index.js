@@ -8,22 +8,35 @@ const INPAGE = 'metamask-inpage'
 const CONTENT_SCRIPT = 'metamask-contentscript'
 const PROVIDER = 'metamask-provider'
 
+// Setup stream for content script communication
 const metamaskStream = new ReactNativePostMessageStream({
   name: INPAGE,
   target: CONTENT_SCRIPT,
 })
 
+// Initialize provider object (window.ethereum)
 initializeProvider({
   connectionStream: metamaskStream,
   shouldSendMetadata: false,
 })
 
-// TODO:temp:remove
-window.destroyStreams = () => {
-  notifyProviderOfStreamFailure()
-}
+// Set content script post-setup function
+Object.defineProperty(window, '_metamaskSetupProvider', {
+  value: () => {
+    setupProviderStreams()
+    delete window._metamaskSetupProvider
+  },
+  configurable: true,
+  enumerable: false,
+  writable: false,
+})
 
-window._metamaskSetupProvider = function () {
+// Functions
+
+/**
+ * Setup function called from content script after the DOM is ready.
+ */
+function setupProviderStreams () {
   // the transport-specific streams for communication between inpage and background
   const pageStream = new ReactNativePostMessageStream({
     name: CONTENT_SCRIPT,
