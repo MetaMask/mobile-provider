@@ -12,6 +12,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - **(SEMVER-MAJOR)** Add `@metamask/inpage-provider@8.0.0` and make necessary changes ([#49](https://github.com/MetaMask/mobile-provider/pull/49))
+
+### Removed
+
 - **(SEMVER-MAJOR)** Remove `window.web3` API ([#42](https://github.com/MetaMask/mobile-provider/pull/42))
 - **(SEMVER-MAJOR)** Remove `<iframe>` support ([#41](https://github.com/MetaMask/mobile-provider/pull/41))
 
