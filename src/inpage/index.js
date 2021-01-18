@@ -1,28 +1,50 @@
-const { initProvider } = require('@metamask/inpage-provider')
-const ObjectMultiplex = require('obj-multiplex')
+const { initializeProvider, shimWeb3 } = require('@metamask/inpage-provider')
+const ObjectMultiplex = require('@metamask/object-multiplex')
 const pump = require('pump')
 const MobilePortStream = require('./MobilePortStream')
 const ReactNativePostMessageStream = require('./ReactNativePostMessageStream')
 
+const INPAGE = 'metamask-inpage'
+const CONTENT_SCRIPT = 'metamask-contentscript'
+const PROVIDER = 'metamask-provider'
+
+// Setup stream for content script communication
 const metamaskStream = new ReactNativePostMessageStream({
-  name: 'inpage',
-  target: 'contentscript',
+  name: INPAGE,
+  target: CONTENT_SCRIPT,
 })
 
-initProvider({
+// Initialize provider object (window.ethereum)
+initializeProvider({
   connectionStream: metamaskStream,
   shouldSendMetadata: false,
 })
 
-window.setupStreams = function () {
+// Set content script post-setup function
+Object.defineProperty(window, '_metamaskSetupProvider', {
+  value: () => {
+    setupProviderStreams()
+    delete window._metamaskSetupProvider
+  },
+  configurable: true,
+  enumerable: false,
+  writable: false,
+})
+
+// Functions
+
+/**
+ * Setup function called from content script after the DOM is ready.
+ */
+function setupProviderStreams () {
   // the transport-specific streams for communication between inpage and background
   const pageStream = new ReactNativePostMessageStream({
-    name: 'contentscript',
-    target: 'inpage',
+    name: CONTENT_SCRIPT,
+    target: INPAGE,
   })
 
   const appStream = new MobilePortStream({
-    name: 'contentscript',
+    name: CONTENT_SCRIPT,
   })
 
   // create and connect channel muxes
@@ -42,11 +64,17 @@ window.setupStreams = function () {
     appMux,
     appStream,
     appMux,
-    (err) => logStreamDisconnectWarning('MetaMask Background Multiplex', err),
+    (err) => {
+      logStreamDisconnectWarning('MetaMask Background Multiplex', err)
+      notifyProviderOfStreamFailure()
+    },
   )
 
   // forward communication across inpage-background for these channels only
-  forwardTrafficBetweenMuxes('provider', pageMux, appMux)
+  forwardTrafficBetweenMuxes(PROVIDER, pageMux, appMux)
+
+  // add web3 shim
+  shimWeb3(window.ethereum)
 }
 
 /**
@@ -80,4 +108,26 @@ function logStreamDisconnectWarning (remoteLabel, err) {
   }
   console.warn(warningMsg)
   console.error(err)
+}
+
+/**
+ * This function must ONLY be called in pump destruction/close callbacks.
+ * Notifies the inpage context that streams have failed, via window.postMessage.
+ * Relies on @metamask/object-multiplex and post-message-stream implementation details.
+ */
+function notifyProviderOfStreamFailure () {
+  window.postMessage(
+    {
+      target: INPAGE, // the post-message-stream "target"
+      data: {
+        // this object gets passed to object-multiplex
+        name: PROVIDER, // the object-multiplex channel name
+        data: {
+          jsonrpc: '2.0',
+          method: 'METAMASK_STREAM_FAILURE',
+        },
+      },
+    },
+    window.location.origin,
+  )
 }

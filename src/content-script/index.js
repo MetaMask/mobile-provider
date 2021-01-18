@@ -1,5 +1,21 @@
 /* global inpageBundle */
 
+if (shouldInject()) {
+  injectScript(inpageBundle)
+  start()
+}
+
+// Functions
+
+/**
+ * Sets up the stream communication and submits site metadata
+ *
+ */
+async function start () {
+  await domIsReady()
+  window._metamaskSetupProvider()
+}
+
 /**
  * Injects a script tag into the current document
  *
@@ -123,18 +139,4 @@ async function domIsReady () {
   }
   // wait for load
   await new Promise((resolve) => window.addEventListener('DOMContentLoaded', resolve, { once: true }))
-}
-
-/**
- * Sets up the stream communication and submits site metadata
- *
- */
-async function start () {
-  await domIsReady()
-  window.setupStreams()
-}
-
-if (shouldInject()) {
-  injectScript(inpageBundle)
-  start()
 }
