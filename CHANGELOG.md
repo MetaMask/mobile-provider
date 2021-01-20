@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.1] - 2021-01-20
+
+### Fixed
+
+- Restore provider `data` event by adding `@metamask/inpage-provider@8.0.3` ([#52](https://github.com/MetaMask/mobile-provider/pull/52))
+
 ## [2.0.0] - 2021-01-18
 
 ### Changed
