@@ -2,6 +2,9 @@
   "name": "@metamask/mobile-provider",
   "version": "2.0.1",
   "main": "dist/index.js",
+  "engines": {
+    "node": ">=12.0.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "yarn build:prep && yarn build:inpage && yarn build:contentscript && yarn build:concat && yarn build:bundle",
