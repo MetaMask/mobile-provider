@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Use node 12 ([#59](https://github.com/MetaMask/mobile-provider/pull/59))
+- Use Node 12 ([#59](https://github.com/MetaMask/mobile-provider/pull/59))
 
 ## [2.0.1] - 2021-01-20
 
