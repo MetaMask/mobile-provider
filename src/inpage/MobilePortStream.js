@@ -1,11 +1,11 @@
-const { inherits } = require('util')
-const { Duplex } = require('readable-stream')
+const { inherits } = require('util');
+const { Duplex } = require('readable-stream');
 
-const noop = () => undefined
+const noop = () => undefined;
 
-module.exports = MobilePortStream
+module.exports = MobilePortStream;
 
-inherits(MobilePortStream, Duplex)
+inherits(MobilePortStream, Duplex);
 
 /**
  * Creates a stream that's both readable and writable.
@@ -14,15 +14,15 @@ inherits(MobilePortStream, Duplex)
  * @class
  * @param {Object} port Remote Port object
  */
-function MobilePortStream (port) {
+function MobilePortStream(port) {
   Duplex.call(this, {
     objectMode: true,
-  })
-  this._name = port.name
-  this._targetWindow = window
-  this._port = port
-  this._origin = location.origin
-  window.addEventListener('message', this._onMessage.bind(this), false)
+  });
+  this._name = port.name;
+  this._targetWindow = window;
+  this._port = port;
+  this._origin = location.origin;
+  window.addEventListener('message', this._onMessage.bind(this), false);
 }
 
 /**
@@ -33,34 +33,34 @@ function MobilePortStream (port) {
  * @param {Object} msg - Payload from the onMessage listener of Port
  */
 MobilePortStream.prototype._onMessage = function (event) {
-  const msg = event.data
+  const msg = event.data;
 
   // validate message
   if (this._origin !== '*' && event.origin !== this._origin) {
-    return
+    return;
   }
   if (!msg || typeof msg !== 'object') {
-    return
+    return;
   }
   if (!msg.data || typeof msg.data !== 'object') {
-    return
+    return;
   }
   if (msg.target && msg.target !== this._name) {
-    return
+    return;
   }
   // Filter outgoing messages
   if (msg.data.data && msg.data.data.toNative) {
-    return
+    return;
   }
 
   if (Buffer.isBuffer(msg)) {
-    delete msg._isBuffer
-    const data = Buffer.from(msg)
-    this.push(data)
+    delete msg._isBuffer;
+    const data = Buffer.from(msg);
+    this.push(data);
   } else {
-    this.push(msg)
+    this.push(msg);
   }
-}
+};
 
 /**
  * Callback triggered when the remote Port
@@ -69,13 +69,13 @@ MobilePortStream.prototype._onMessage = function (event) {
  * @private
  */
 MobilePortStream.prototype._onDisconnect = function () {
-  this.destroy()
-}
+  this.destroy();
+};
 
 /**
  * Explicitly sets read operations to a no-op
  */
-MobilePortStream.prototype._read = noop
+MobilePortStream.prototype._read = noop;
 
 /**
  * Called internally when data should be written to
@@ -87,20 +87,23 @@ MobilePortStream.prototype._read = noop
  * @param {Function} cb Called when writing is complete or an error occurs
  */
 MobilePortStream.prototype._write = function (msg, _encoding, cb) {
-
   try {
     if (Buffer.isBuffer(msg)) {
-      const data = msg.toJSON()
-      data._isBuffer = true
-      window.ReactNativeWebView.postMessage(JSON.stringify({ ...data, origin: window.location.href }))
+      const data = msg.toJSON();
+      data._isBuffer = true;
+      window.ReactNativeWebView.postMessage(
+        JSON.stringify({ ...data, origin: window.location.href }),
+      );
     } else {
       if (msg.data) {
-        msg.data.toNative = true
+        msg.data.toNative = true;
       }
-      window.ReactNativeWebView.postMessage(JSON.stringify({ ...msg, origin: window.location.href }))
+      window.ReactNativeWebView.postMessage(
+        JSON.stringify({ ...msg, origin: window.location.href }),
+      );
     }
   } catch (err) {
-    return cb(new Error('MobilePortStream - disconnected'))
+    return cb(new Error('MobilePortStream - disconnected'));
   }
-  return cb()
-}
+  return cb();
+};

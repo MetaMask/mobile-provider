@@ -1,4 +1,4 @@
-const path = require('path')
+const path = require('path');
 
 const config = {
   entry: './index.js',
@@ -18,17 +18,20 @@ const config = {
           loader: 'babel-loader',
           options: {
             presets: ['@babel/preset-env'],
-            plugins: ['@babel/plugin-proposal-object-rest-spread', '@babel/plugin-proposal-class-properties'],
+            plugins: [
+              '@babel/plugin-proposal-object-rest-spread',
+              '@babel/plugin-proposal-class-properties',
+            ],
           },
         },
       },
     ],
   },
-}
+};
 
 module.exports = (_env, argv) => {
   if (argv.mode === 'development') {
-    config.mode = 'development'
+    config.mode = 'development';
   }
-  return config
-}
+  return config;
+};
