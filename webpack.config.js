@@ -1,4 +1,4 @@
-const path = require('path')
+const path = require('path');
 
 const config = {
   entry: './dist/index-raw.js',
@@ -9,11 +9,11 @@ const config = {
   },
 
   mode: 'production',
-}
+};
 
 module.exports = (_env, argv) => {
   if (argv.mode === 'development') {
-    config.mode = 'development'
+    config.mode = 'development';
   }
-  return config
-}
+  return config;
+};
