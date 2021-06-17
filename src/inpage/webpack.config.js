@@ -1,11 +1,11 @@
-const path = require('path');
+const path = require('path')
 
 const config = {
   entry: './index.js',
 
   output: {
     path: path.resolve(__dirname, '..', '..', 'dist'),
-    filename: 'inpage-content.js',
+    filename: 'inpage-content.js'
   },
 
   mode: 'production',
@@ -18,20 +18,17 @@ const config = {
           loader: 'babel-loader',
           options: {
             presets: ['@babel/preset-env'],
-            plugins: [
-              '@babel/plugin-proposal-object-rest-spread',
-              '@babel/plugin-proposal-class-properties',
-            ],
-          },
-        },
-      },
-    ],
-  },
-};
+            plugins: ['@babel/plugin-proposal-object-rest-spread', '@babel/plugin-proposal-class-properties']
+          }
+        }
+      }
+    ]
+  }
+}
 
 module.exports = (_env, argv) => {
   if (argv.mode === 'development') {
-    config.mode = 'development';
+    config.mode = 'development'
   }
-  return config;
-};
+  return config
+}

@@ -2,7 +2,7 @@ module.exports = {
   env: {
     browser: true,
     commonjs: true,
-    es6: true,
+    es6: true
   },
 
   extends: ['@metamask/eslint-config', '@metamask/eslint-config-nodejs'],
@@ -10,16 +10,17 @@ module.exports = {
   globals: {
     Atomics: 'readonly',
     Buffer: 'readonly',
-    SharedArrayBuffer: 'readonly',
+    SharedArrayBuffer: 'readonly'
   },
 
   parserOptions: {
-    ecmaVersion: 2018,
+    ecmaVersion: 2018
   },
 
   rules: {
     'node/no-sync': 'off',
+    'prettier/prettier': 0
   },
 
   ignorePatterns: ['!.eslintrc.js', 'dist/'],
-};
+}

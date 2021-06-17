@@ -1,5 +1,5 @@
 {
-  "name": "@metamask/mobile-provider",
+  "name": "@eidoo/mobile-provider",
   "version": "2.1.0",
   "main": "dist/index.js",
   "engines": {
@@ -16,6 +16,7 @@
     "build:dev": "yarn build:prep && yarn build:dev:inpage && yarn build:contentscript && yarn build:concat && yarn build:dev:bundle",
     "build:dev:inpage": "cd src/inpage && webpack --mode=development --config webpack.config.js",
     "build:dev:bundle": "webpack --mode=development --config webpack.config.js",
+    "format": "prettier --config ./.prettierrc.js --write  \"./**/*.+(js|ts|json)\"",
     "lint:eslint": "eslint . --cache --ext js,ts",
     "lint:misc": "prettier '**/*.json' '**/*.md' '**/*.yml' --single-quote --ignore-path .gitignore",
     "lint": "yarn lint:eslint && yarn lint:misc --check",
@@ -24,15 +25,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MetaMask/mobile-provider.git"
+    "url": "git+https://github.com/eidoo/mobile-provider.git"
   },
   "author": "MetaMask",
   "license": "ISC",
-  "description": "The JavaScript injected into every web page in the MetaMask Mobile browser.",
+  "description": "The JavaScript injected into every web page in the Eidoo Mobile browser.",
   "bugs": {
-    "url": "https://github.com/MetaMask/mobile-provider/issues"
+    "url": "https://github.com/Eidoo/mobile-provider/issues"
   },
-  "homepage": "https://github.com/MetaMask/mobile-provider#readme",
+  "homepage": "https://github.com/Eidoo/mobile-provider#readme",
   "files": [
     "dist/index.js"
   ],
@@ -43,7 +44,7 @@
     "@babel/preset-env": "^7.12.7",
     "@metamask/eslint-config": "^6.0.0",
     "@metamask/eslint-config-nodejs": "^6.0.0",
-    "@metamask/inpage-provider": "^8.0.3",
+    "@eidoo/providers": "git://github.com/eidoo/providers.git#eidoo",
     "@metamask/object-multiplex": "^1.1.0",
     "babel-loader": "^8.0.6",
     "concat-cli": "^4.0.0",
