@@ -1,4 +1,6 @@
-dist/
+index-raw.js
+inpage-bundle.js
+inpage-content.js
 node_modules/
 .DS_Store
 *.log
