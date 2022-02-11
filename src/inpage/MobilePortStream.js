@@ -91,15 +91,17 @@ MobilePortStream.prototype._write = function (msg, _encoding, cb) {
     if (Buffer.isBuffer(msg)) {
       const data = msg.toJSON();
       data._isBuffer = true;
-      window.ReactNativeWebView.postMessage(
-        JSON.stringify({ ...data, origin: window.location.href }),
+      window.flutter_inappwebview.callHandler(
+        'handleMessage',
+        JSON.stringify({ ...data, origin: window.location.href })
       );
     } else {
       if (msg.data) {
         msg.data.toNative = true;
       }
-      window.ReactNativeWebView.postMessage(
-        JSON.stringify({ ...msg, origin: window.location.href }),
+      window.flutter_inappwebview.callHandler(
+        'handleMessage',
+        JSON.stringify({ ...msg, origin: window.location.href })
       );
     }
   } catch (err) {
