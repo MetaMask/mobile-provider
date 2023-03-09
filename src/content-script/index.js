@@ -13,7 +13,6 @@ if (shouldInject()) {
  */
 async function start() {
   await domIsReady();
-  window._metamaskSetupProvider();
 }
 
 /**
@@ -138,10 +137,14 @@ function blockedDomainCheck() {
 async function domIsReady() {
   // already loaded
   if (['interactive', 'complete'].includes(document.readyState)) {
+    window._metamaskSetupProvider();
     return;
   }
   // wait for load
-  await new Promise((resolve) =>
-    window.addEventListener('DOMContentLoaded', resolve, { once: true }),
+  await new Promise((resolve) => {
+    window.addEventListener('DOMContentLoaded', resolve, { once: true })
+    window._metamaskSetupProvider();
+  }
+
   );
 }
