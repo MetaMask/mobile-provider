@@ -58,5 +58,8 @@
     "readable-stream": "^2.3.7",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.10"
+  },
+  "resolutions": {
+    "stream-browserify": "^3.0.0"
   }
 }
