@@ -57,7 +57,8 @@
     "pump": "^3.0.0",
     "readable-stream": "^2.3.7",
     "webpack": "^4.44.2",
-    "webpack-cli": "^3.3.10"
+    "webpack-cli": "^3.3.10",
+    "uuid": "^9.0.1"
   },
   "resolutions": {
     "stream-browserify": "^3.0.0"
