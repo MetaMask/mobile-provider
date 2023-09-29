@@ -1,4 +1,4 @@
-const { initializeProvider, shimWeb3 } = require('@metamask/inpage-provider');
+const { initializeProvider, shimWeb3 } = require('@metamask/providers');
 const ObjectMultiplex = require('@metamask/object-multiplex');
 const pump = require('pump');
 const MobilePortStream = require('./MobilePortStream');
