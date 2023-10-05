@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.0] - 2023-10-05
+
+### Changed
+
+- **BREAKING:** Bump required node version from v12 to v16 ([#85](https://github.com/MetaMask/mobile-provider/pull/85))
+- Bump version of `@metamask/inpage-provider` to `v13.0.0` (package renamed to `@metamask/providers`) ([#85](https://github.com/MetaMask/mobile-provider/pull/85))
+
 ## [2.1.0] - 2021-05-05
 
 ### Added
