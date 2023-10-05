@@ -45,8 +45,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `@metamask/inpage-provider@6.1.0` ([#34](https://github.com/MetaMask/mobile-provider/pull/34))
 
 [unreleased]: https://github.com/MetaMask/mobile-provider/compare/v3.0.0...HEAD
-[2.0.1]: https://github.com/MetaMask/mobile-provider/compare/v2.1.0...v3.0.0
-[2.0.1]: https://github.com/MetaMask/mobile-provider/compare/v2.0.1...v2.1.0
+[3.0.0]: https://github.com/MetaMask/mobile-provider/compare/v2.1.0...v3.0.0
+[2.1.0]: https://github.com/MetaMask/mobile-provider/compare/v2.0.1...v2.1.0
 [2.0.1]: https://github.com/MetaMask/mobile-provider/compare/v2.0.0...v2.0.1
 [2.0.0]: https://github.com/MetaMask/mobile-provider/compare/v1.3.0...v2.0.0
 [1.3.0]: https://github.com/MetaMask/mobile-provider/compare/v1.2.4...v1.3.0
