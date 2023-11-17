@@ -45,7 +45,7 @@
     "@metamask/eslint-config": "^6.0.0",
     "@metamask/eslint-config-nodejs": "^6.0.0",
     "@metamask/object-multiplex": "^1.1.0",
-    "@metamask/providers": "^13.0.0",
+    "@metamask/providers": "^14.0.1",
     "babel-loader": "^8.0.6",
     "concat-cli": "^4.0.0",
     "eslint": "^7.26.0",
