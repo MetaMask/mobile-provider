@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.0] - 2023-10-05
+
+### Changed
+
+- **BREAKING:** Bump required node version from v12 to v16 ([#85](https://github.com/MetaMask/mobile-provider/pull/85))
+- Bump version of `@metamask/inpage-provider` to `v13.0.0` (package renamed to `@metamask/providers`) ([#85](https://github.com/MetaMask/mobile-provider/pull/85))
+- Bump version of `stream-browserify` to `v3.0.0` ([#85](https://github.com/MetaMask/mobile-provider/pull/85))
+
 ## [2.1.0] - 2021-05-05
 
 ### Added
@@ -36,8 +44,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `@metamask/inpage-provider@6.1.0` ([#34](https://github.com/MetaMask/mobile-provider/pull/34))
 
-[unreleased]: https://github.com/MetaMask/mobile-provider/compare/v2.1.0...HEAD
-[2.0.1]: https://github.com/MetaMask/mobile-provider/compare/v2.0.1...v2.1.0
+[unreleased]: https://github.com/MetaMask/mobile-provider/compare/v3.0.0...HEAD
+[3.0.0]: https://github.com/MetaMask/mobile-provider/compare/v2.1.0...v3.0.0
+[2.1.0]: https://github.com/MetaMask/mobile-provider/compare/v2.0.1...v2.1.0
 [2.0.1]: https://github.com/MetaMask/mobile-provider/compare/v2.0.0...v2.0.1
 [2.0.0]: https://github.com/MetaMask/mobile-provider/compare/v1.3.0...v2.0.0
 [1.3.0]: https://github.com/MetaMask/mobile-provider/compare/v1.2.4...v1.3.0
